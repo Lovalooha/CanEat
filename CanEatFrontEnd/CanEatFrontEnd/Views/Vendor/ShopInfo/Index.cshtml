@@ -1,0 +1,57 @@
+﻿@using CanEatFrontEnd.Models.PageModel.VendorShopInfo;
+@using System.IO;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_VendorLayout";
+}
+@model VendorShopInfoModel
+
+<h1>@Model.currVendor.Name</h1>
+
+<hr class="border border-dark border-2 opacity-50" />
+
+<div class="d-flex flex-row justify-content-between w-100">
+    <h1>Menu</h1>
+    <a class="btn btn-primary btn-lg rounded-pill" asp-action="Index" asp-controller="VendorDishInsert">
+            + Add Dish
+    </a>
+</div>
+
+<hr />
+
+
+
+    @foreach (Food f in Model.foodList)
+    {
+    <div class="shopDetail">
+        <div class="shopDetail-img">
+            @{
+                var fileName = @f.Id + ".jpg";
+                var path = Environment.CurrentDirectory + "\\wwwroot\\Assets\\Food\\" + fileName;
+            }
+            @if (File.Exists(path))
+            {
+                <img src="~/Assets/Food/@fileName" alt="@fileName" class="img-thumbnail" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
+            }
+            else
+            {
+                <img src="~/Assets/nebula.jpg" alt="@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
+            }
+
+        </div>
+
+        <div class="content">
+            <h2>@f.Name</h2>
+            <p>@f.Description</p>
+            <p>Rp @f.Price.ToString("#,##0")</p>
+            <div class="d-flex flex-row gap-2">
+                <a id="delete-btn" class="btn btn-danger btn-lg" asp-action="deleteDish" asp-controller="VendorShopInfo" asp-route-id="@f.Id">Delete</a>
+                <a id="update-btn" class="btn btn-primary btn-lg" asp-action="Index" asp-controller="VendorDishEdit" asp-route-id="@f.Id">Update</a>
+            </div>
+
+        </div>
+    </div>
+    <hr />
+    }

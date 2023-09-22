@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_GuestLayout";
+}
+<div class="welcome-card d-inline-flex flex-column align-items-center align-content-center border border-2 border-primary rounded p-2">
+    <h1 >Welcome!</h1>
+    <h2 >CanEat: Online Food Ordering Service</h2>
+    <form class="button-group d-inline-flex flex-column m-2">
+        <input type="submit" class="btn-success p-2" asp-area="" asp-controller="Login" asp-action="Index" value="Login">
+        <input type="submit" class="btn-success p-2" asp-area="" asp-controller="CustomerRegister" asp-action="Index" value="Register as Customer">
+        <input type="submit" class="btn-success p-2" asp-area="" asp-controller="VendorRegister" asp-action="Index" value="Register as Vendor">
+    </form>
+
+</div>
